@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DashBord</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body {
+            color: #404E67;
+            background: #F5F7FA;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .table-wrapper {
+            width: 700px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        }
+
+        .table-title {
+            padding-bottom: 10px;
+            margin: 0 0 10px;
+        }
+
+        .table-title h2 {
+            margin: 6px 0 0;
+            font-size: 22px;
+        }
+
+        .table-title .add-new {
+            float: right;
+            height: 30px;
+            font-weight: bold;
+            font-size: 12px;
+            text-shadow: none;
+            min-width: 100px;
+            border-radius: 50px;
+            line-height: 13px;
+        }
+
+        .table-title .add-new i {
+            margin-right: 4px;
+        }
+
+        table.table {
+            table-layout: fixed;
+        }
+
+        table.table tr th,
+        table.table tr td {
+            border-color: #e9e9e9;
+        }
+
+        table.table th i {
+            font-size: 13px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        table.table th:last-child {
+            width: 100px;
+        }
+
+        table.table td a {
+            cursor: pointer;
+            display: inline-block;
+            margin: 0 5px;
+            min-width: 24px;
+        }
+
+        table.table td a.add {
+            color: #27C46B;
+        }
+
+        table.table td a.edit {
+            color: #FFC107;
+        }
+
+        table.table td a.delete {
+            color: #E34724;
+        }
+
+        table.table td i {
+            font-size: 19px;
+        }
+
+        table.table td a.add i {
+            font-size: 24px;
+            margin-right: -1px;
+            position: relative;
+            top: 3px;
+        }
+
+        table.table .form-control {
+            height: 32px;
+            line-height: 32px;
+            box-shadow: none;
+            border-radius: 2px;
+        }
+
+        table.table .form-control.error {
+            border-color: #f50000;
+        }
+
+        table.table td .add {
+            display: none;
+        }
+        .pagination {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: #00695c;
+  padding: 0.5rem;
+  border: 1px solid #00695c;
+  margin: 0 1rem;
+}
+
+.pagination a:hover,
+.pagination a:active,
+.pagination a.active {
+  background: #00695c;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .main-header__nav {
+    display: flex;
+  }
+
+  #side-menu-toggle {
+    display: none;
+  }
+
+  .user-message {
+    width: 30rem;
+  }
+}
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="table-wrapper">
+
+            <% if(messages && messages.length){ %>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <%= messages[0] %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% } %>
+
+                    <% if(alerts && alerts.length){ %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <%= alerts[0] %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>
+                        <% } %>
+
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <h2>User <b>Details</b></h2>
+                                    </div>
+                                    <div class="col-sm-4">
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Picture</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="tablebody">
+                                    <% users.forEach(function(user){ %>
+                                        <tr>
+                                            <td>
+                                                <img src="/public/upload/<%= user.uploadImg %> %>" alt="Profile Picture">
+                                            </td>
+                                            <td>
+                                                <%= user.name %>
+                                            </td>
+                                            <td>
+                                                <%= user.email %>
+                                            </td>
+                                            <td>
+                                                <a class="edit" title="Edit" data-toggle="tooltip"
+                                                    href="/update/<%= user.id %>"> <i
+                                                        class="material-icons">&#xE254;</i> </a>
+
+                                                <a class="delete" title="Delete" data-toggle="tooltip"
+                                                    href="/delete/<%= user.id %>"> <i
+                                                        class="material-icons">&#xE872;</i></a>
+                                            </td>
+                                        </tr>
+                                        <% }); %>
+                                </tbody>
+
+                            </table>
+
+                            <span>
+                                <a class="glyphicon glyphicon-log-out btn btn-info btn-lg" href="/logout">Logout</a>
+                            </span>
+
+                            <br><br>
+
+                    <section class="pagination justify-content-end pe-5" >
+
+                         <% if(currentPage != 1 && previousPage != 1) { %>  
+                            <a href="?page=1">1</a>
+                         <% } %>
+                         <% if(hasPreviousPage) { %>
+                            <a href="?page=<%= previousPage %>"><%= previousPage %></a>
+                         <% } %>   
+                            <a href="?page=<%= currentPage %>" class="active"><%= currentPage %></a>
+                         <% if(hasNextPage) { %>
+                            <a href="?page=<%= nextPage %>"><%= nextPage %></a>
+                         <% } %>
+                         <% if(lastPage !== currentPage && nextPage !== lastPage) { %>
+                            <a href="?page=<%= lastPage %>"><%= lastPage %></a>
+                         <% } %>
+                         
+                    </section>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+<!-- <script src="../public/script.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js"
+integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</html>
