@@ -4,7 +4,7 @@ const bcryptjs = require("bcryptjs");
 // const nodemailer = require("nodemailer");
 // const sendgridTransport = require('nodemailer-sendgrid-transport');
 const Record_per_page = 5;
-const fileUploadPath = path.join(__dirname, "../public/upload");
+// const fileUploadPath = path.join(__dirname, "../public/upload");
 
 
 // const transporter = nodemailer.createTransport(
@@ -138,16 +138,11 @@ exports.dashbord = async (req, res) => {
       users, messages: message, alerts: alert
     });
   
-
-  // const message = req.flash("message");
-  // const alert = req.flash("alert");
-
-  // res.render("dashbord", { users, messages: message, alerts: alert });
 };
 
-const clearImage = fileUploadPath =>{
-  fileUploadPath = path.join(__dirname,'_', fileUploadPath);
-}
+// const clearImage = fileUploadPath =>{
+//   fileUploadPath = path.join(__dirname,'_', fileUploadPath);
+// }
 
 exports.deleteUser = async (req, res) => {
   try {

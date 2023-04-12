@@ -40,6 +40,6 @@ router.post("/userEdit", checkAuthenticated, userController.UserEdit);
 router.get("/delete/:id", checkAuthenticated, userController.deleteUser);
 
 router.get("/logout", checkAuthenticated, userController.logout);
-router.get("/getPaginate",userController.getPaginateUser);
+// router.get("/getPaginate",userController.getPaginateUser);
 
 module.exports = router;
